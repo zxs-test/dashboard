@@ -12,7 +12,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o dashboard-api /build/api/m
 FROM alpine:3.20
 
 WORKDIR /app
-COPY --from=builder /build/dashboard-api .
+COPY --from=builder /build/api/dashboard-api .
 
 # 可选：添加证书支持
 RUN apk add --no-cache ca-certificates

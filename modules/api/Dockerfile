@@ -1,7 +1,7 @@
 # 第一阶段：构建 Go 可执行文件
 FROM golang:1.24.4 AS builder
 
-WORKDIR /build
+WORKDIR /build/api
 
 COPY modules/common/ /build/common/
 COPY modules/api/ /build/api/

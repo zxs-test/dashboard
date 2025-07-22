@@ -16,8 +16,6 @@ jobs:
       matrix:
         component: [api, web]
         arch: [amd64, arm64]
-    env:
-      IMAGE_NAME: ${{ env.REGISTRY_REPO }}/dashboard-${{ matrix.component }}
 
     steps:
       - name: Checkout code
@@ -49,4 +47,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ env.branch }}-${{ env.suffix }}
+            ${{ env.REGISTRY_REPO }}/dashboard-${{ matrix.component }}:${{ env.branch }}-${{ env.suffix }}

@@ -6,6 +6,10 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# Install dependencies based on the preferred package manager
+COPY modules/web/package.json ./
+RUN npm install
+
 
 # Rebuild the source code only when needed
 FROM base AS builder

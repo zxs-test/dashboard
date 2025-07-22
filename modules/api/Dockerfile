@@ -1,17 +1,18 @@
 # 第一阶段：构建 Go 可执行文件
 FROM golang:1.24.4 AS builder
 
-WORKDIR /build
+WORKDIR /build/api
 
-COPY modules/api/ ./
+COPY modules/api/ /build/api
+COPY modules/common/ /build/common
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o dashboard-api main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o dashboard-api api/main.go
 
 # 第二阶段：精简运行环境
 FROM alpine:3.20
 
 WORKDIR /app
-COPY --from=builder /build/dashboard-api .
+COPY --from=builder /build/api/dashboard-api .
 
 # 可选：添加证书支持
 RUN apk add --no-cache ca-certificates

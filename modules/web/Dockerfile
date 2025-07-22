@@ -6,10 +6,6 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY modules/web/package.json modules/web/yarn.lock* modules/web/package-lock.json* modules/web/pnpm-lock.yaml* ./
-RUN npm ci
-
 
 # Rebuild the source code only when needed
 FROM base AS builder
